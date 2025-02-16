@@ -1,2 +1,2 @@
 # Writeup
-CTF Writeup Archive
+CTF Writeups From Team Sea~
