@@ -1,6 +1,7 @@
 ![Screenshot 2025-02-17 000725](https://github.com/user-attachments/assets/66689f34-1117-411f-b525-4d468473d68b)
 # Technique = *Ret2libc*
 
+
 ## 1. Patch binary & Binary protection checking.
 We're given 3 binaries from the challenge they are *chall*, *ld-2.27.so*, and *libc-2.27.so*. Now let's do a patching on the *chall* binary.
 ```bash
@@ -20,6 +21,7 @@ $ pwn checksec chall_patched
     Stripped:   No
 ```
 
+
 ## 2. Analyze the binary statically & dynamically
 Ghidra:\
 ![image](https://github.com/user-attachments/assets/5a8eb7b1-7f7c-417b-a5a1-ecceabab6762)\
@@ -31,6 +33,7 @@ PIE disabled is very helpful here because we can just grab our rop gadgets from 
 these 2 above would be enough to help us setup the exploit.
 
 Noticed that PIE is disabled but here ASLR is enabled by default from our OS. Since ASLR randomizing base address of functions, then we'd have to use the leaked address at runtime to calculate the base address of *libc* in this case. If we got the base address of *libc* then address of function like *system()* would be easily obtain at runtime and we'd have to just do basic arithmetic of addresses here. The leaked address that we mention is *wctrans* as we see above in the *printf("%p",wctrans)*. Now we'd need the offset of *wctrans* to the *libc*'s base address, to obtain these offsets we can use *pwntools* we can also use *pwntools* to find the rop gadget that we need so we don't have to manually use *ropper*/*ROPgadget* to extract gadgets 1 by 1. One more thing to remember is the string '/bin/sh\x00' which we will need to pass it to *system()* where we can pop a shell. We will see the details below in the script.
+
 
 ## 3. Writing the exploit
 We got 2 things to do here:
