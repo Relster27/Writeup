@@ -32,7 +32,7 @@ PIE disabled is very helpful here because we can just grab our rop gadgets from 
 ```ret;         ``` <--- Used for stack alignment purposes (since this is a 64bit binary).\
 these 2 above would be enough to help us setup the exploit.
 
-Noticed that PIE is disabled but here ASLR is enabled by default from our OS. Since ASLR randomizing base address of functions, then we'd have to use the leaked address at runtime to calculate the base address of *libc* in this case. If we got the base address of *libc* then address of function like *system()* would be easily obtain at runtime and we'd have to just do basic arithmetic of addresses here. The leaked address that we mention is *wctrans* as we see above in the *printf("%p",wctrans)*. Now we'd need the offset of *wctrans* to the *libc*'s base address, to obtain these offsets we can use *pwntools* we can also use *pwntools* to find the rop gadget that we need so we don't have to manually use *ropper*/*ROPgadget* to extract gadgets 1 by 1. One more thing to remember is the string '/bin/sh\x00' which we will need to pass it to *system()* where we can pop a shell. We will see the details below in the script.
+Noticed that PIE is disabled but here ASLR is enabled by default from our OS. Since ASLR randomizing base address of functions, then we'd have to use the leaked address at runtime to calculate the base address of *libc* in this case. If we got the base address of *libc* then address of function like *system()* would be easily obtain at runtime and we'd have to just do basic arithmetic of addresses here. The leaked address that we mention is *wctrans* as we see above in the *printf("%p",wctrans)*. Now we'd need the offset of *wctrans* to the *libc*'s base address, to obtain these offsets we can use *pwntools* we can also use *pwntools* to find the rop gadget that we need so we don't have to manually use *ropper*/*ROPgadget* to extract gadgets 1 by 1. One more thing to remember is the string '/bin/sh\x00' which we will need to pass it to *system()* where we can pop a shell. For obtaining the address of string '/bin/sh\x00' we can use method and function called *search()* and *next()*, more detail will be shown on the exploit. We will see the details below in the script.
 
 
 ## 3. Writing the exploit
@@ -44,7 +44,7 @@ Let's find the offset first, this time we'll use gdb because it's straight forwa
 ![image](https://github.com/user-attachments/assets/a55190e3-2701-4809-b848-d1dd2091ee9e)\
 Since there's no canary so we don't have to worry about it. Let's put our focus to the buffer size and saved RBP, we can see that 0xa0 in decimal is 160, don't forget the 8 bytes of RBP too. So our total junk payload would be 168 bytes, this means our RIP will start at 169th byte up to 176th byte.
 
-For extracting the *wctrans* leaked address we'd use method and function called *search()* and *next()*, more detail will be shown on the exploit.
+For extracting the *wctrans* leaked address we'd use python's slicing technique, more detail can be seen on the exploit.
 
 Below is the final exploit for this challenge:
 ```python
