@@ -129,3 +129,9 @@ p.close()
 # NOTE:
 # ret2libc
 ```
+
+## Keyword
+ret2libc\
+ASLR and PIE\
+x86_64 calling convention\
+Binary dependency (specific libc for specific offset)
