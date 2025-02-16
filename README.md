@@ -1,4 +1,4 @@
 # Writeup
-CTF Writeups From Team Sea~
+CTF Writeups by Team Sea~
 
 [MORE TO WRITE]
