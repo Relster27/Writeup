@@ -133,6 +133,15 @@ p.close()
 # ret2libc
 ```
 
+
+## 4. Run the exploit
+Local:\
+![Screenshot 2025-02-17 024958](https://github.com/user-attachments/assets/39d3e76a-6b0f-48f4-8314-0aa1331bcea1)
+
+Remote:\
+![Screenshot 2025-02-17 025227](https://github.com/user-attachments/assets/ecbb101b-a013-42ae-b68f-8001b9f38eaa)
+
+
 ## Keyword
 ret2libc\
 ASLR and PIE\
