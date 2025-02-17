@@ -25,7 +25,8 @@ $ pwn checksec chall_patched
 
 ## 2. Analyze the binary statically & dynamically
 Ghidra:\
-![image](https://github.com/user-attachments/assets/5a8eb7b1-7f7c-417b-a5a1-ecceabab6762)
+![img_2](https://github.com/user-attachments/assets/9db167a3-a696-43d4-a445-f50d49ede350) \
+
 Not much is happening here, the only main thing we need to pay attention is the *printf("%p",wctrans);* which is leaking a libc function to stdout and *gets((char \*)local_a8);* which lets us input more than the buffer could hold (overflow). From here we could tell that our exploit would implement ret2libc (return-to-libc) technique to achieve our goal which is popping a shell on remote machine.
 
 PIE disabled is very helpful here because we can just grab our rop gadgets from the binary itself, below is the list of gadgets we'd use:\
@@ -42,7 +43,8 @@ We got 2 things to do here:
 2. Extract the leaked address from the binary and store it into a variable.
 
 Let's find the offset first, this time we'll use gdb because it's straight forward (IMO).\
-![image](https://github.com/user-attachments/assets/a55190e3-2701-4809-b848-d1dd2091ee9e)
+![img_3](https://github.com/user-attachments/assets/6359b582-65f3-48f2-849c-18af0013126e) \
+
 Since there's no canary so we don't have to worry about it. Let's put our focus to the buffer size and saved RBP, we can see that 0xa0 in decimal is 160, don't forget the 8 bytes of RBP too. So our total junk payload would be 168 bytes, this means our RIP will start at 169th byte up to 176th byte.
 
 For extracting the *wctrans* leaked address we'd use python's slicing technique, more detail can be seen on the exploit.
