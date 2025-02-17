@@ -1,5 +1,6 @@
 ![Screenshot 2025-02-17 000725](https://github.com/user-attachments/assets/66689f34-1117-411f-b525-4d468473d68b)
-# Technique = *Ret2libc*
+# Technique : *Ret2libc*
+Solved by : Relster
 
 
 ## 1. Patch binary & Binary protection checking.
