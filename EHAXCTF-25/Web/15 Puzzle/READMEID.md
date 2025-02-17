@@ -1,41 +1,50 @@
-#The Challenge Description : 
+# The Challenge Description
 
 ![image](https://github.com/user-attachments/assets/0ee2ddef-1c6b-40dd-80ed-3561cf016b1e)
 
+Challenge link: http://chall.ehax.tech:8001/
 
-Challenge link : http://chall.ehax.tech:8001/
+## Initial Access
 
 Saat Saya Mengakses link website yang diberikan kita akan diberikan page welcome 
 
 ![image](https://github.com/user-attachments/assets/559eea30-407c-4b17-802d-c37dea5c6b37)
 
+## The Puzzle
+
 Setelah welcome klik start dan kita akan berada pada page classic 15 puzzle 
 
 ![image](https://github.com/user-attachments/assets/19e51ffc-deb3-48d3-8001-3b9418e7f060)
 
-Jadi disini kita di minta oleh author untuk memainkan puzzle ini , setelah saya pertama kali solve puzzlenya 
-pada secara manual itu hanya akan redirect kita ke next puzzle jadi akan memberikan link yang berbeda seperti ini :
+## Initial Analysis
+
+Jadi disini kita di minta oleh author untuk memainkan puzzle ini, setelah saya pertama kali solve puzzlenya pada secara manual itu hanya akan redirect kita ke next puzzle jadi akan memberikan link yang berbeda seperti ini:
 
 ```bash
 http://chall.ehax.tech:8001/p/d7b51dadf6594b0e8e0737a88ea176fd
 http://chall.ehax.tech:8001/p/b1b11293ac06477dbcc6f753e1673fca
 ```
 
-setelah saya coba main secara manual lagi akan melakukan hal yang sama , jadi disini saya kepikiran untuk mencoba memakai burpsuite untuk melihat 
-response server setiap kita solve puzzle nya dan saya ketemukan akan memberikan output seperti ini : 
+## Server Response Analysis
+
+Setelah saya coba main secara manual lagi akan melakukan hal yang sama, jadi disini saya kepikiran untuk mencoba memakai burpsuite untuk melihat response server setiap kita solve puzzle nya dan saya ketemukan akan memberikan output seperti ini: 
 
 ```bash
 "next_puzzle":"/p/8f3ac09cc5514446aa0a17f9c09d3ff1","solved":true
 ```
-pada source code puzzle kita setiap start puzzlenya akan kelihatan jadi kita bisa tau setiap start puzzlenya akan di start dengan angka apa saja setiap row 
-dan juga setiap langkah yang kita ambil : 
+
+## Source Code Analysis
+
+Pada source code puzzle kita setiap start puzzlenya akan kelihatan jadi kita bisa tau setiap start puzzlenya akan di start dengan angka apa saja setiap row dan juga setiap langkah yang kita ambil: 
 
 ```bash
 let puzzle = [[1, 2, 6, 8], [5, 0, 14, 7], [13, 15, 12, 4], [10, 3, 11, 9]];
 let movements = [];
 ```
 
-Setelah mengetahui itu semua saya membuat script untuk mengotomisasi penyelesaian puzzle , saya menggunakan algoritma A* (A-Star) untuk script ini : 
+## Automation Solution
+
+Setelah mengetahui itu semua saya membuat script untuk mengotomisasi penyelesaian puzzle, saya menggunakan algoritma A* (A-Star) untuk script ini: 
 
 ```python
 import requests
@@ -278,7 +287,10 @@ def automate_solving():
 
 if __name__ == "__main__":
     automate_solving()
+
 ```
+
+## Final Results
 
 Setelah Running scriptnya pada akhirnya script berhenti karena sudah tidak ada solve lagi pada page berikutnya 
 
@@ -293,70 +305,26 @@ Check response text:
 
 Puzzle solved! (96 puzzles solved)
 Moving to next puzzle...
-
-Fetching puzzle from: http://chall.ehax.tech:8001/fl4g_i5_you_c4n7_s33_m3
-Response status: 200
-Response text:
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wow !!</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-        a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>You won with this one 🥵</h1>
-    <a href="/g37_y0ur_r3al_fl4g">The flag</a>
-</body>
-</html>
-Failed to extract puzzle state
 ```
 
-setelah itu saya mencoba akses website link yang kita dapatkan ada dua page didapatkan 
+## Final Pages
+
+Setelah itu saya mencoba akses website link yang kita dapatkan ada dua page didapatkan 
 
 ```bash
 http://chall.ehax.tech:8001/fl4g_i5_you_c4n7_s33_m3
 http://chall.ehax.tech:8001/g37_y0ur_r3al_fl4g
 ```
+
 ![image](https://github.com/user-attachments/assets/a44f5ec8-d836-408d-a9b1-b470747c76a6)
 ![image](https://github.com/user-attachments/assets/dc639ea4-6270-496e-a3b8-3f57c17f9ff4)
 
+## Flag Discovery
 
-saya mencoba menggunakan burpsuite untuk mengakses masing masing page dan mendapatkan sesuatu yang aneh pada page 
-http://chall.ehax.tech:8001/fl4g_i5_you_c4n7_s33_m3
+Saya mencoba menggunakan burpsuite untuk mengakses masing masing page dan mendapatkan sesuatu yang aneh pada page http://chall.ehax.tech:8001/fl4g_i5_you_c4n7_s33_m3
 
 ![image](https://github.com/user-attachments/assets/277aab59-17bc-4d20-bf02-af92a6fae624)
 
+## Flag
 
-Flag : EH4X{h499y_u_s0lv3d_15_9uzz13_100_7im35}
-
-                             
+Flag: EH4X{h499y_u_s0lv3d_15_9uzz13_100_7im35}
