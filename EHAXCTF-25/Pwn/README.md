@@ -1,4 +1,4 @@
-![img_1](https://github.com/user-attachments/assets/499ba486-0676-43cc-b694-dfff14924939)
+![img_1](https://github.com/user-attachments/assets/499ba486-0676-43cc-b694-dfff14924939) \
 Solved by : Relster
 # Technique : *Ret2libc*
 
