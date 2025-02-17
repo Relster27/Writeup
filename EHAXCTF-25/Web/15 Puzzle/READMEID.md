@@ -305,6 +305,52 @@ Check response text:
 
 Puzzle solved! (96 puzzles solved)
 Moving to next puzzle...
+
+Fetching puzzle from: http://chall.ehax.tech:8001/fl4g_i5_you_c4n7_s33_m3
+Response status: 200
+Response text:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wow !!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+        a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>You won with this one 🥵</h1>
+    <a href="/g37_y0ur_r3al_fl4g">The flag</a>
+</body>
+</html>
+Failed to extract puzzle state
 ```
 
 ## Final Pages
