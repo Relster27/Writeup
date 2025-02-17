@@ -1,6 +1,7 @@
 #The Challenge Description : 
 
-![image(https://github.com/user-attachments/assets/bc2c8c4a-a5d4-4b00-8929-93d87ec4b159)
+![image](https://github.com/user-attachments/assets/0ee2ddef-1c6b-40dd-80ed-3561cf016b1e)
+
 
 Challenge link : http://chall.ehax.tech:8001/
 
@@ -29,13 +30,12 @@ response server setiap kita solve puzzle nya dan saya ketemukan akan memberikan 
 pada source code puzzle kita setiap start puzzlenya akan kelihatan jadi kita bisa tau setiap start puzzlenya akan di start dengan angka apa saja setiap row 
 dan juga setiap langkah yang kita ambil : 
 
-```
-bash
+```bash
 let puzzle = [[1, 2, 6, 8], [5, 0, 14, 7], [13, 15, 12, 4], [10, 3, 11, 9]];
 let movements = [];
 ```
 
-Setelah mengetahui itu semau saya membuat script untuk mengotomisasi penyelesaian puzzle , saya menggunakan algoritma A* (A-Star) untuk script ini : 
+Setelah mengetahui itu semua saya membuat script untuk mengotomisasi penyelesaian puzzle , saya menggunakan algoritma A* (A-Star) untuk script ini : 
 
 ```python
 import requests
