@@ -1,7 +1,7 @@
 # The Challenge Description
 
-![image](https://github.com/user-attachments/assets/0ee2ddef-1c6b-40dd-80ed-3561cf016b1e)
-
+![image](https://github.com/user-attachments/assets/0ee2ddef-1c6b-40dd-80ed-3561cf016b1e)\
+Solved by : Trendo-Dipu
 Challenge link: http://chall.ehax.tech:8001/
 
 ## Initial Access
