@@ -55,9 +55,3 @@ Therefore, the flag would be:
 ```
 KashiCTF{OHNOBINARYMORSE}
 ```
-
-## Verification
-The solution makes sense because:
-* It uses both the binary and Morse code aspects hinted at in the challenge
-* The message "OH NO BINARY MORSE" is a playful reference to the encoding method used
-* The decoded message is readable and follows a logical pattern
