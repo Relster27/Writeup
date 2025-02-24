@@ -1,6 +1,7 @@
 # Lost Frequencies - Crypto Challenge
 
 ![image](https://github.com/user-attachments/assets/c33f5473-64a9-4db6-806e-5ba6f3862065)
+
 Solve by : Trendo
 
 ## Challenge Analysis
