@@ -42,14 +42,6 @@ The documentation showed several available endpoints:
 First, I created a user by sending a POST request to `/create/{username}` with the following JSON payload:
 
 ![image](https://github.com/user-attachments/assets/ba781f8f-e2bd-412f-8b4d-4c324c478cb9)
-```json
-{
-  "name": "trendo",
-  "email": "trendo",
-  "password": "trendo",
-  "gender": "trendo"
-}
-```
 
 The API responded with a successful message:
 
@@ -69,31 +61,11 @@ I then checked the current user information by sending a GET request to `/get/tr
 
 ![image](https://github.com/user-attachments/assets/5bc44b7e-6f44-4d4c-8b8a-758efbe42ff9)
 
-```json
-{
-  "message": {
-    "name": "trendo",
-    "email": "trendo",
-    "password": "trendo",
-    "gender": "trendo",
-    "role": "guest"
-  }
-}
-```
 
 ### 4. Privilege Escalation
 I discovered that the API allowed arbitrary updates to user properties, including the role field. I sent a PUT request to `/update/trendo` with this JSON payload:
 
 ![image](https://github.com/user-attachments/assets/91dddc48-9c74-4b2c-b502-42b8e8e53494)
-```json
-{
-  "name": "trendo",
-  "email": "trendo",
-  "password": "trendo",
-  "gender": "trendo",
-  "role": "admin"
-}
-```
 
 ### 5. Verifying Admin Access
 After updating the user, I verified that my role had been changed to "admin" by sending another GET request to `/get/trendo`.
