@@ -81,13 +81,3 @@ Finally, I was able to get the flag by sending a GET request to `/flag/trendo`.
 ```
 KashiCTF{m455_4551gnm3n7_ftw_WlpSPDZdR}
 ```
-
-## Vulnerability Analysis
-The vulnerability in this challenge was an **Insecure Direct Object Reference (IDOR)** and **Mass Assignment** vulnerability. The API allowed users to:
-
-1. Create an account with basic privileges
-2. Directly modify security-critical properties (the role field)
-3. Escalate privileges by assigning themselves the admin role
-4. Access restricted resources with the elevated privileges
-
-This is a common vulnerability in APIs where proper authorization checks are not implemented for update operations, allowing users to modify fields that should be protected.
