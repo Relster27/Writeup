@@ -1,7 +1,9 @@
-**Writeup: CTF Challenge - Online Python Editor**
+#The Challenge Description 
 
-**Challenge Name:** Online Python Editor  
+![image](https://github.com/user-attachments/assets/ad0646fc-3161-4f40-9ead-0163cc48e22f)
 
+Solved by : Trendo
+Challenge link : http://python.ctf.theromanxpl0.it:7001/
 
 ---
 
