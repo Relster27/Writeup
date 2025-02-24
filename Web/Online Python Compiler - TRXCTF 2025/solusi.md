@@ -10,7 +10,6 @@
 
 ![image](https://github.com/user-attachments/assets/7ef50601-6533-4dd0-8990-c2713a18e832)
 
-
 ## Challenge Description
 *"If you're tired of fast and good-looking editors, try this. Now with extra crispiness!"*
 
@@ -114,6 +113,8 @@ else:
    - The script parses the error message for lines containing "FLAG ="
    - Extracts the flag value from between quotation marks
    - Handles potential parsing failures gracefully
+
+![image](https://github.com/user-attachments/assets/02126559-331a-4ddf-9b2c-7c3aa7e280da)
 
 ## Flag
 `TRX{4ll_y0u_h4v3_t0_d0_1s_l00k_4t_th3_s0urc3_c0d3}`
