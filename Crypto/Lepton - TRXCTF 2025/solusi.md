@@ -187,6 +187,7 @@ if __name__ == "__main__":
 
 When running the exploit script, we connect to the server, send the point (0,0), and receive an encrypted flag. After decryption, we get:
 
+![image](https://github.com/user-attachments/assets/743816c8-c451-4253-9be1-4c60e1960640)
 
 
 ## Mathematical Explanation
