@@ -70,13 +70,13 @@ We can see our junk input (**0x41**s) are there on the stack.
 Now let's put our attention at these addresses: \
 **0x00007ffff7dd4d68** <-- __libc_start_call_main+120 \
 **0x00005555555551da** <-- main\
-![image](https://github.com/user-attachments/assets/f902b87e-d92b-4aaa-9259-f7cf7c23c152)
+![image](https://github.com/user-attachments/assets/de193c74-7b31-4159-9e50-2a9268215589)
 
 So the buffer is 0x20 (32 bytes) + 8 bytes (RBP) and the 41st byte is the rip, here we can just put the address of _vsyscall_ twice until it reaches the address **0x00005555555551da** which located on the stack as well. \
-![image](https://github.com/user-attachments/assets/a1afad91-040c-4ddd-83c8-83e38f0fe04e)
+![image](https://github.com/user-attachments/assets/bf8c0d9e-7861-4ee0-9dfd-982df416a60b)
 
 After that we just need to partially overwrite 1 more byte to the **main** function that located there, we will overwrite it with they byte '**\xa9**', why? let's take a look at the image below: \
-![image](https://github.com/user-attachments/assets/5ce719d9-ddbc-44bb-bb76-c336693a46d2) \
+![image](https://github.com/user-attachments/assets/40d8d997-d943-4a5c-ba56-21c3ef40a9f0)
 Since the address of **main** and **win** is only different at their last 1 byte, we can just overflow that '**\xa9**' so that the address of **main** gets overwrite with **win**.
 
 Let's first setup the fake flag in our environment variable for testing the exploit. We'll call the env as **FLAG** like in the binary itself.
