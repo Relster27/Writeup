@@ -1,7 +1,7 @@
 ![img_1](https://github.com/user-attachments/assets/499ba486-0676-43cc-b694-dfff14924939) \
 Solved by : Relster
 # Technique : *Ret2libc*
-
+ 
 
 ## 1. Patch binary & Binary protection checking.
 We're given 3 binaries from the challenge they are *chall*, *ld-2.27.so*, and *libc-2.27.so*. Now let's do a patching on the *chall* binary.
