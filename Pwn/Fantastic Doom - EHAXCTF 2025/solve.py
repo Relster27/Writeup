@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pwn import *
+from pwn import * 
 
 context.arch = 'amd64'
 #context.log_level = 'DEBUG'
