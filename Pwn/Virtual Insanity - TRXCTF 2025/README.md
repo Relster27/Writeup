@@ -1,9 +1,9 @@
-![Screenshot 2025-02-26 113030](https://github.com/user-attachments/assets/fd4721d4-694d-45c0-9e46-d799995012e0) \
+![Screenshot 2025-02-26 113030](https://github.com/user-attachments/assets/fd4721d4-694d-45c0-9e46-d799995012e0)
 \
 I didn't solve this problem on time but i think this problem really testing our fundamental understanding in pwning (IMO). We will see why.
 
 # NOTE :
-Author said there's no need of bruteforcing in this challenge and also the challenge is not dependent in libc. \
+Author said there's no need of bruteforcing in this challenge and also the challenge is not dependent in libc.
 And also if **vsyscall** is not enabled in your machine please refer to [this](https://helpcenter.onlyoffice.com/installation/mail-enabling-vsyscall.aspx) article.
 
 # Technique = Ret2win (with **vsyscall** gadget)
