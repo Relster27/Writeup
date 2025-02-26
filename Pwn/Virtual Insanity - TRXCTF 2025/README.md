@@ -56,14 +56,14 @@ Now we have a _ret_ gadget, so the next technique is partially overwriting the r
 
 ## 2. Analyzing Binary in GDB.
 First let's set breakpoints at these addresses to check the stack before and after we send our junk input:\
-![Screenshot 2025-02-27 015002](https://github.com/user-attachments/assets/f67c20ea-2bcf-405e-b7cc-48be49f90791)
+![image](https://github.com/user-attachments/assets/e6038c13-52ec-4099-9faf-d6d3e93262fa)
 
 Stack layout **before** junk input:\
-![Screenshot 2025-02-27 015556](https://github.com/user-attachments/assets/36810dd3-6fad-48e2-8835-75161f019bbe)
+![image](https://github.com/user-attachments/assets/ebfefe95-2084-47db-bff6-78fdc8198be3)
 
 Stack layout **after** junk input:\
-![Screenshot 2025-02-27 015738](https://github.com/user-attachments/assets/64680289-0fff-4d1f-9bc9-d7b5b8eef4a1)
-![Screenshot 2025-02-27 015823](https://github.com/user-attachments/assets/b26de687-6045-49bb-8536-f356dbacf302)
+![image](https://github.com/user-attachments/assets/e89883f6-0787-40b8-8d03-60628b91ed55)
+![image](https://github.com/user-attachments/assets/76042d39-89bf-4731-b628-65f20fb957e7)
 
 We can see our junk input (**0x41**s) are there on the stack.
 
@@ -137,12 +137,11 @@ p.close()
 ```
 
 ## 4. Result
-Local:
-![Screenshot 2025-02-27 024937](https://github.com/user-attachments/assets/dddafed0-2ee5-4c95-b41f-e4d47a629d45)
+Local:\
+![image](https://github.com/user-attachments/assets/05cec976-dfdb-4151-b00d-d370df15be06)
 
-Remote:
-![Screenshot 2025-02-27 025009](https://github.com/user-attachments/assets/3ce2606c-1a1a-4309-b8a9-fccea68ae38f)
-
+Remote:\
+![image](https://github.com/user-attachments/assets/f42c924e-4d21-4759-a462-9da782aef849)
 
 ## Keyword
 ret2win \
