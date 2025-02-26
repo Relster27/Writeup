@@ -44,14 +44,14 @@ Checking binary protection.
     Stripped:   No
 ```
 
-As we can see this challenge looks pretty simple at first glance, it looks like a simple ret2win challenge. But the problem now is, how do we return to the win function? there's no leak and PIE is enabled. The short answer is we can make use of the gadget available at _vsyscall_, so the gadget that we're gonna need is just a simple _ret_ gadget and we can find that by jumping to _vsyscall_'s address which located at fixed address at _0xffffffffff600000_, the instructions is somewhat look like this:
+As we can see this challenge looks pretty simple at first glance, it looks like a simple ret2win challenge. But the problem now is, how do we return to the win function? there's no leak and PIE is enabled. The short answer is we can make use of the gadget available at _vsyscall_, so the gadget that we're gonna need is just a simple _ret_ gadget and we can find that by jumping to _vsyscall_'s address which located at fixed address at _0xffffffffff600000_, the instructions are somewhat look like this:
 ```asm
 __vsyscall_page:
     mov $__NR_gettimeofday, %rax
     syscall
     ret
 ```
-Now we have a _ret_ gadget, so the next technique is partially overwriting the return address in stack to win() function. We will see clearly what i mean below.
+Now we have a _ret_ gadget, so the next technique/step is partially overwriting the return address in stack to **win()** function. We will see clearly what i mean in the next step.
 
 
 ## 2. Analyzing Binary in GDB.
