@@ -114,6 +114,7 @@ gdb_script = f"""
 # ===================================== #
 
 """
+vmmap
 0xffffffffff600000 0xffffffffff601000 r-xp     1000      0 [vsyscall]
 
 0xffffffffff600000:  mov    rax,0x60
