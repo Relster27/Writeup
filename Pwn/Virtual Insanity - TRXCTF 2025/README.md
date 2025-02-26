@@ -55,24 +55,25 @@ Now we have a _ret_ gadget, so the next technique is partially overwriting the r
 
 
 ## 2. Analyzing Binary in GDB.
-First let's set breakpoints at these addresses to check the stack before and after we send our junk input:\
+First let's set breakpoints at these addresses to check the stack before and after we send our junk input:
 ![Screenshot 2025-02-27 015002](https://github.com/user-attachments/assets/f67c20ea-2bcf-405e-b7cc-48be49f90791)
 
-Stack layout **before** junk input:\
+Stack layout **before** junk input:
 ![Screenshot 2025-02-27 015556](https://github.com/user-attachments/assets/36810dd3-6fad-48e2-8835-75161f019bbe)
 
-Stack layout **after** junk input:\
+Stack layout **after** junk input:
 ![Screenshot 2025-02-27 015738](https://github.com/user-attachments/assets/64680289-0fff-4d1f-9bc9-d7b5b8eef4a1)
+\
 ![Screenshot 2025-02-27 015823](https://github.com/user-attachments/assets/b26de687-6045-49bb-8536-f356dbacf302)
 
 We can see our junk input (**0x41**s) are there on the stack.
 
 Now let's put our attention at these addresses: \
 **0x00007ffff7dd4d68** <-- __libc_start_call_main+120 \
-**0x00005555555551da** <-- main \
+**0x00005555555551da** <-- main 
 ![image](https://github.com/user-attachments/assets/f902b87e-d92b-4aaa-9259-f7cf7c23c152)
 
-So the buffer is 0x20 (32 bytes) + 8 bytes (RBP) and the 41st byte is the rip, here we can just put the address of _vsyscall_ twice until it reaches the address **0x00005555555551da** which located on the stack as well.
+So the buffer is 0x20 (32 bytes) + 8 bytes (RBP) and the 41st byte is the rip, here we can just put the address of _vsyscall_ twice until it reaches the address **0x00005555555551da** which located on the stack as well. \
 ![image](https://github.com/user-attachments/assets/a1afad91-040c-4ddd-83c8-83e38f0fe04e)
 
 After that we just need to partially overwrite 1 more byte to the **main** function that located there, we will overwrite it with they byte '**\xa9**', why? let's take a look at the image below: \
@@ -137,10 +138,10 @@ p.close()
 ```
 
 ## 4. Result
-Local: \
+Local:
 ![Screenshot 2025-02-27 024937](https://github.com/user-attachments/assets/dddafed0-2ee5-4c95-b41f-e4d47a629d45)
 
-Remote: \
+Remote:
 ![Screenshot 2025-02-27 025009](https://github.com/user-attachments/assets/3ce2606c-1a1a-4309-b8a9-fccea68ae38f)
 
 
