@@ -76,7 +76,7 @@ So the buffer is 0x20 (32 bytes) + 8 bytes (RBP) and the 41st byte is the rip, h
 ![image](https://github.com/user-attachments/assets/bf8c0d9e-7861-4ee0-9dfd-982df416a60b)
 
 After that we just need to partially overwrite 1 more byte to the **main** function that located there, we will overwrite it with the byte '**\xa9**', why? let's take a look at the image below: \
-![image](https://github.com/user-attachments/assets/40d8d997-d943-4a5c-ba56-21c3ef40a9f0)
+![image](https://github.com/user-attachments/assets/40d8d997-d943-4a5c-ba56-21c3ef40a9f0) \
 Since the address of **main** and **win** is only different at their last 1 byte, we can just overflow that '**\xa9**' so that the address of **main** gets overwrite with **win**.
 
 Let's first setup the fake flag in our environment variable for testing the exploit. We'll call the env as **FLAG** like in the binary itself.
