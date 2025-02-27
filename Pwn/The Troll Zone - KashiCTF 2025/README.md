@@ -26,24 +26,25 @@ Patch:\
 This should give us the __vuln_patched__ binary.\
 \
 Running binary:\
-![pic_1](https://github.com/user-attachments/assets/5568ec12-50b6-48ae-a01d-bd34a19fc60d) \
+![image](https://github.com/user-attachments/assets/fb8f9552-91df-410a-becc-51919e4f6d4b)
 If we continue leaking using '_%p_' format specifier, we'll find an address which still located within the _libc_ memory area and the offset is at the 17th offset (_%17$p_). Note that the address is still in _libc_ memory area but we that leaked address is not a _libc_ _function_ so we'll have to debug it in **GDB** to see nearest address that's a _libc function_. You'll see what i mean in the next image.
 
 Debugging in **GDB**:\
 Let's put a __breakpoint__ here and _run_ it.
-![Screenshot 2025-02-27 124235](https://github.com/user-attachments/assets/9ddce0c6-ff56-4148-8cf9-88df4a74dc39)
+![Screenshot 2025-02-27 124235](https://github.com/user-attachments/assets/e600377e-187b-4644-9f85-6430c41c4c96)
 
 Type _ni_ and we will be asked for the input, and we'll type _%17$p_ to leak the address as i mention above.
-![image](https://github.com/user-attachments/assets/aa93c0b0-2864-439e-9bdf-cdf530c1a180)
+![Screenshot 2025-02-27 124359](https://github.com/user-attachments/assets/571f07d4-7af4-42ee-a3f6-cab9905cd8ee)
 
 We'll copy that _leaked address_ (_0x7ffff7e0924a_ in this case) and examine nearby address that is hopefully some _libc function_ so that we can subtract the offset of that function to get the base address of _libc_.
 
 
 We can see that the leaked address is close to ___libc_start_main_, from here we just need to do some basic pointer arithmetic to get the address of ___libc_start_main_.\
-![image](https://github.com/user-attachments/assets/1a33da72-a825-40f0-bfaa-d4a217858492)
+![Screenshot 2025-02-27 124758](https://github.com/user-attachments/assets/d9bb708f-a1e6-495a-ac52-6e56b9c783eb)
+
 
 It's _0x36_ bytes or 54 bytes in difference between _0x7ffff7e0924a_ and ___libc_start_main_.
-![image](https://github.com/user-attachments/assets/21976e45-ad26-46c5-84bb-1c5e75a48f80)
+![image](https://github.com/user-attachments/assets/8a549865-87ed-4ade-bcd3-c3045df634d7)
 
 
 From here it's just trivial like traditional _**ret2libc**_ challenges, we'll just subtract the address of ___libc_start_main_ with its offset and voila we get the base address of _libc_.
@@ -146,10 +147,10 @@ p.close()
 
 ## 4. Result
 Local:\
-![image](https://github.com/user-attachments/assets/ee77ef4a-bdd4-452e-b978-b7a79e387b60)
+![Screenshot 2025-02-27 125815](https://github.com/user-attachments/assets/de3ac2e4-40c9-403a-b76e-3af625d58367)
 
 Remote:\
-![image](https://github.com/user-attachments/assets/ef5bcc65-ac08-4174-ac85-c76d4bc2bcb7)
+![Screenshot 2025-02-27 130010](https://github.com/user-attachments/assets/e896452e-e2bb-441f-b4c0-38a226e2899e)
 Note : I was writing this writeup when the challenge is done, so no flags but the exploitation remains the same.
 
 ## Keyword
