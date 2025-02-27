@@ -1,6 +1,4 @@
-
-![image](https://github.com/user-attachments/assets/5a03a650-6da4-4747-ba85-fe3c7be81a3f) \
-\
+![Screenshot 2025-02-24 160120](https://github.com/user-attachments/assets/d8779f32-86da-42b2-8512-5f5af87f4ff3) \
 Solved by : Relster
 
 # Technique = Format string leak & Ret2libc
