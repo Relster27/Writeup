@@ -1,7 +1,7 @@
 # Hello there!
-CTF Writeups by Team Sea~
+CTF Writeups by Sea~
 
-We're university student based on Indonesia that play CTF for fun but we also like to learn about anything related to Computer Science.
+We are university students from Indonesia who play CTFs for fun, but we also enjoy learning about anything related to Computer Science. This repository archives CTF challenges that we find 'interesting' and worth saving.
 
 Feel free to reach us!\
 Our CTFtime : https://ctftime.org/team/361419
